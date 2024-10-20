@@ -1,120 +1,85 @@
-import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
-    
+
     public static void main(String[] args) {
-        int[][] matrix = new int[4][4];
-        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
         
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                matrix[i][j] = random.nextInt(50) + 1;
-                
-            }
-            
-        }
-
-        System.out.println("Матриця 4x4:");
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.printf("%3d ", matrix[i][j]);
-                
-            }
-            
-            System.out.println();
-            
-        }
-
-        int sumEvenRows = 0;
-        int sumOddRows = 0;
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (i % 2 == 0) {
-                    sumEvenRows += matrix[i][j];
-                } else {
-                    sumOddRows += matrix[i][j];
-                    
-                }
-                
-            }
-            
-        }
-
-        long productEvenCols = 1;
-        long productOddCols = 1;
-
-        for (int j = 0; j < 4; j++) {
-            for (int i = 0; i < 4; i++) {
-                if (j % 2 == 0) {
-                    productEvenCols *= matrix[i][j];
-                } else {
-                    productOddCols *= matrix[i][j];
-                    
-                }
-                
-            }
-            
-        }
-
-        System.out.println("Сума елементів у парних рядках (рядок 0, 2): " + sumEvenRows);
-        System.out.println("Сума елементів у непарних рядках (рядок 1, 3): " + sumOddRows);
-        System.out.println("Добуток елементів у парних стовпцях (стовпець 0, 2): " + productEvenCols);
-        System.out.println("Добуток елементів у непарних стовпцях (стовпець 1, 3): " + productOddCols);
-
-        if (isMagicSquare(matrix)) {
-            System.out.println("Матриця є магічним квадратом.");
-        } else {
-            System.out.println("Матриця не є магічним квадратом.");
-            
-        }
+        System.out.print("Введіть ціле число: ");
+        int number = scanner.nextInt();
+        printSquare(number);
+        
+        System.out.print("Введіть радіус: ");
+        double radius = scanner.nextDouble();
+        System.out.print("Введіть висоту: ");
+        double height = scanner.nextDouble();
+        double volume = calculateCylinderVolume(radius, height);
+        System.out.println("Об'єм циліндра з радіусом " + radius + " і висотою " + height + " дорівнює " + volume);
+        
+        int[] array = {10, 20, 30, 40, 50};
+        int sum = calculateArraySum(array);
+        System.out.println("Масив чисел: [10, 20, 30, 40, 50]");
+        System.out.println("Сума всіх елементів масиву дорівнює " + sum);
+        
+        System.out.print("Введіть рядок: ");
+        scanner.nextLine();
+        String text = scanner.nextLine();
+        String reversedText = reverseString(text);
+        System.out.println("Рядок в зворотньому порядку: " + reversedText);
+        
+        System.out.print("Введіть a: ");
+        int a = scanner.nextInt();
+        System.out.print("Введіть b: ");
+        int b = scanner.nextInt();
+        int powerResult = power(a, b);
+        System.out.println("Результат " + a + "^" + b + " дорівнює " + powerResult);
+        
+        System.out.print("Введіть ціле число n: ");
+        int n = scanner.nextInt();
+        System.out.print("Введіть текстовий рядок: ");
+        scanner.nextLine();
+        String message = scanner.nextLine();
+        printTextMultipleTimes(n, message);
         
     }
 
-    public static boolean isMagicSquare(int[][] matrix) {
-        int n = matrix.length;
-        int magicSum = 0;
+    public static void printSquare(int number) {
+        int square = number * number;
+        System.out.println("Квадрат числа " + number + " дорівнює " + square + ".");
+        
+    }
 
-        for (int j = 0; j < n; j++) {
-            magicSum += matrix[0][j];
+    public static double calculateCylinderVolume(double radius, double height) {
+        return Math.PI * radius * radius * height;
+        
+    }
+
+    public static int calculateArraySum(int[] array) {
+        int sum = 0;
+        for (int num : array) {
+            sum += num;
             
         }
+        
+        return sum;
+        
+    }
 
-        for (int i = 1; i < n; i++) {
-            int rowSum = 0;
-            for (int j = 0; j < n; j++) {
-                rowSum += matrix[i][j];
-            }
-            if (rowSum != magicSum) {
-                return false;
-                
-            }
-            
-        }
+    public static String reverseString(String text) {
+        return new StringBuilder(text).reverse().toString();
+        
+    }
 
-        for (int j = 0; j < n; j++) {
-            int colSum = 0;
-            for (int i = 0; i < n; i++) {
-                colSum += matrix[i][j];
-                
-            }
-            
-            if (colSum != magicSum) {
-                return false;
-                
-            }
-            
-        }
+    public static int power(int a, int b) {
+        return (int) Math.pow(a, b);
+        
+    }
 
-        int diagonalSum1 = 0;
-        int diagonalSum2 = 0;
+    public static void printTextMultipleTimes(int n, String text) {
         for (int i = 0; i < n; i++) {
-            diagonalSum1 += matrix[i][i];
-            diagonalSum2 += matrix[i][n - 1 - i];
+            System.out.println(text);
             
         }
-    
-        return diagonalSum1 == magicSum && diagonalSum2 == magicSum;
         
     }
     
