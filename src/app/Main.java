@@ -1,48 +1,31 @@
-public class Person {
-
-    private String name;
-    private int age;
-    private String profession;
-
-    public Person(String name, int age, String profession) {
-        this.name = name;
-        this.age = age;
-        this.profession = profession;
-        
-    }
-
-    public void setProfession(String profession) {
-        this.profession = profession;
-        
-    }
-
-    public void displayInfo() {
-        System.out.println("Ім'я: " + name + ", Вік: " + age + ", Професія: " + profession);
-        
-    }
-    
-}
+package app;
 
 public class Main {
+
     public static void main(String[] args) {
 
-        Person person1 = new Person("John", 30, "Інженер");
-        Person person2 = new Person("Mary", 25, "Вчитель");
-        Person person3 = new Person("Bob", 35, "Лікар");
+        Customer customer = getCustomer(getData());
 
-        System.out.println("Інформація про осіб:");
-        person1.displayInfo();
-        person2.displayInfo();
-        person3.displayInfo();
+        String output = "Customer: " + customer.getName() +
+                ", phone " + customer.getPhone();
 
-        person1.setProfession("Архітектор");
-        System.out.println("\n(Після оновлення професії)");
-        person1.displayInfo();
+        getOutput(output);
 
-        person1.setProfession("Дизайнер");
-        System.out.println("\n(Після другого оновлення професії)");
-        person1.displayInfo();
-        
     }
-    
+
+    public static String[] getData() {
+        return new String[]{"Tom", "555 123-8596"};
+
+    }
+
+    public static Customer getCustomer(String[] data) {
+        return new Customer(data[0], data[1]);
+
+    }
+
+    public static void getOutput(String output) {
+        System.out.println(output);
+
+    }
+
 }
